@@ -22,7 +22,6 @@ int funkce()
 
 void loadNumbers(int number, int array[])
 {
-    int i;
       for(int index=0;index<number;index++) {
           array[index] = index + 1;
       }
