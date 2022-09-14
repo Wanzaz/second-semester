@@ -6,7 +6,7 @@
 
 //#define NDEBUG
 
-#include "gvid.h"       // par drobnosti pro zjednoduseni prace
+/* #include "gvid.h"       // par drobnosti pro zjednoduseni prace */
 #include <stdio.h>
 #include <stdlib.h>
 // #include <string.h>  // pro praci s textovymi retezci
@@ -28,7 +28,7 @@ DESCRIPTION OF THE TASK:
 #define LENGTH 1000
 
 
-def struct{
+typedef struct{
     char name[16];
     int phone_number;
 } TContact;
@@ -73,7 +73,7 @@ int main(void)
     TContact contacts[]={{"Pavel",12345},{"Jana",54555},{"Oskar",12332},{"Emil",55555},{"Jindra",87411},{"Petr", 98999}};
     
     
-    test();
+    /* test(); */
     return 0;
 }
 
