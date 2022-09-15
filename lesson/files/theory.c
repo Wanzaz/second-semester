@@ -14,4 +14,12 @@ Working with files 4. steps:
 	2. check if file is NULL (empty pointer)
 	3. check if EOF (End Of File) 
 	4. close file - fclose(name_of_file)
+
+Output/Input for each character:
+	int character = fgetc(name_of_file);
+					fputc(character, name_of_file);
+					ungetc(character, name_of_file);
+
+fprintf(name_of_file, "%d %f %20s", ...)
+fscanf(name_of_file, "%d %f %20s", ...)
 */
