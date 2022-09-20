@@ -34,50 +34,145 @@ typedef struct{
 } TContact;
 
 
-/*void test(void)
-{
-    dprintf("Makej!\n");
-}*/
 
-void loadArray(int array[], int length, int *number) { // pointer to integer
-    //*number = 10; // dereference operator
-  
-    printf("Enter the size of an array (max %d): ", LENGTH);
-    // there doesn't have to be pointer or ampersand (&*number) because we already specified that
-    scanf("%d", number);
-}
+void loadNumbers(int array[], int length, int *number);
+void showNumbers(int array[], int length, int *number);
+void task1(void);
 
-void task1(void) {
-    int array[LENGTH];
-    int number;
-    
-    loadArray(array, LENGTH, &number);
-}
+void loadStrings(char array[][16], int current_name_amount);
+void showStrings(char array[][16], int current_name_amount);
+void task2(void);
 
+void showStruct(TContact array[], int current_name_amount);
+void task3(void);
 
-
-void loadNumbers(int number, int array[])
-{
-      for(int index=0;index<number;index++) {
-          array[index] = index + 1;
-      }
-      
-      
-}
-
+void loadStruct(TContact array[], int current_name_amount);
+void task4(void);
 
 //int main(int argc, char *argv[])  // pro parametry prikazoveho radku
 int main(void)
 {
     int array[LENGTH];
     TContact contacts[]={{"Pavel",12345},{"Jana",54555},{"Oskar",12332},{"Emil",55555},{"Jindra",87411},{"Petr", 98999}};
+
+	/* task1(); */
+	/* task2(); */
+	/* task3(); */
+	task4();
     
     
-    /* test(); */
     return 0;
 }
 
 
+/*void test(void)
+{
+    dprintf("Makej!\n");
+}*/
 
+
+/* -------------Task 1--------------- */
+
+void loadNumbers(int array[], int length, int *number) { // pointer to integer
+    //*number = 10; // dereference operator
+	for (int index=0; index < *number; index++) {
+		array[index] = index + 1;
+	}
+  
+}
+
+void showNumbers(int array[], int length, int *number) {
+	for (int index=0; index < *number; index++) {
+		printf("%d\n", index);
+	}
+	
+}
+
+void task1(void) {
+    int array[LENGTH];
+    int number;
+    printf("Enter the size of an array (max %d): ", LENGTH);
+    // there doesn't have to be pointer or ampersand (&*number) because we already specified that
+    scanf("%d", &number);
+	number += 1;
+    
+    loadNumbers(array, LENGTH, &number);
+	showNumbers(array, LENGTH, &number);
+}
+
+
+/* -------------Task 2--------------- */
+
+void loadStrings(char array[][16], int current_name_amount) { 
+	int index;
+	for (index=0; index < current_name_amount; index++) {
+		printf("Enter the %d. name: ", index + 1);
+		scanf("%s", array[index]);
+	}
+		/* array[*current_size][index] = '\0'; */
+  
+}
+
+void showStrings(char array[][16], int current_name_amount) {
+	int index;
+	for (index=0; index < current_name_amount; index++) {
+		printf("%s\n", array[index]);
+	}
+	/* for (index=0; array[index][16] != '\0'; index++) { */
+	/* 	printf("%s", array[index]); */
+	/* } */
+	
+}
+
+void task2(void) {
+	int name_amount;
+	char array[LENGTH][16];
+    printf("Enter a amount of names (max %d): ", LENGTH);
+    scanf("%d", &name_amount);
+	loadStrings(array, name_amount);
+	showStrings(array, name_amount);
+
+}
+
+
+/* -------------Task 3--------------- */
+
+void showStruct(TContact array[], int current_name_amount) {
+	int index;
+	for (index=0; index < current_name_amount; index++) {
+		printf("Name: %s, Phone: %d\n", array[index].name, array[index].phone_number);
+	}
+}
+
+void task3(void) {
+	int name_amount=6;
+    TContact contacts[]={{"Pavel",12345},{"Jana",54555},{"Oskar",12332},{"Emil",55555},{"Jindra",87411},{"Petr", 98999}};
+
+	showStruct(contacts, name_amount);
+}
+
+
+/* -------------Task 4--------------- */
+
+void loadStruct(TContact array[], int current_name_amount) {
+	int index;
+	for (index=0; index < current_name_amount; index++) {
+		printf("Enter the %d. name: ", index + 1);
+		scanf("%15s", array[index].name);
+		printf("Enter the %d. phone: ", index + 1);
+		scanf("%d", &array[index].phone_number);
+		printf("\n");
+	}
+}
+
+void task4(void) {
+	int contact_amount;
+    printf("Enter a amount of contacts (max %d): ", LENGTH);
+    scanf("%d", &contact_amount);
+
+    TContact new_contacts[LENGTH]={};
+	loadStruct(new_contacts, contact_amount);
+	showStruct(new_contacts, contact_amount);
+}
 
 
