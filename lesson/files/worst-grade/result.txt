@@ -1,0 +1,4 @@
+Name: Pepa, Worst grade: 1
+Name: Pavel, Worst grade: 2
+Name: Tereza, Worst grade: 3
+Name: Yun, Worst grade: 1
