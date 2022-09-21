@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 	}
 
 	if (strcmp(argv[1], "char") != 0 && strcmp(argv[1],"num") != 0) {
-		fprintf(stderr, "Don't understand 1. paramter");
+		fprintf(stderr, "Don't understand 1. paramter\n");
 		return EXIT_FAILURE;
 	}
 
@@ -37,31 +37,33 @@ int main(int argc, char **argv) {
 
 	FILE* file = fopen(inputpath, "r");
 	if (file == NULL) {
-		fprintf(stderr, "Input file %s is unable to open!", inputpath);
+		fprintf(stderr, "Input file %s is unable to open!\n", inputpath);
 		return EXIT_FAILURE;
 	}
 
 	FILE* copy = fopen(outputpath, "w");
 	if (copy == NULL) {
-		fprintf(stderr, "Input file %s is unable to open!", inputpath);
+		fprintf(stderr, "Input file %s is unable to open!\n", inputpath);
 		return EXIT_FAILURE;
 	}
 
 	if (strcmp(argv[1], "char") == 0) {
-		printf("------------------------------------------");
+		printf("------------------------------------------\n");
 		printf("Task 1 - Copy By Characters\n");
 		copyByChars(file, copy);
 		printf("Task 1 - Copy Is Done\n");
-		printf("------------------------------------------");
+		printf("------------------------------------------\n");
 	}
-	else if (strcmp(argv[1], "num")) {
-		printf("------------------------------------------");
+	else if (strcmp(argv[1], "num") == 0) {
+		printf("------------------------------------------\n");
 		printf("Task 2 - Copy By Numbers\n");
 		copyByNums(file, copy);
 		printf("Task 2 - Copy Is Done\n");
-		printf("------------------------------------------");
-		
+		printf("------------------------------------------\n");
 	}
+	else
+		printf("Something went wrong...\n");
+
 
 	fclose(file);
 	fclose(copy);
