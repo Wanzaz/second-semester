@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void replaceNumsToDollar(FILE* input, FILE* output) {
+void copyByChars(FILE* input, FILE* output) {
 	int character;
 	
 	while ((character = fgetc(input)) != EOF) { //EOF isn't character
-		if (character >= 54 && character <= 57) { // '5' or '9'
-			character = '$';
-		}
 		fputc(character,output);
 	}
 }
@@ -21,7 +18,7 @@ int main(int argc, char **argv) {
 	if (copy == NULL)
 		return EXIT_FAILURE;
 
-	replaceNumsToDollar(file, copy);
+	copyByChars(file, copy);
 
 	fclose(file);
 	fclose(copy);
