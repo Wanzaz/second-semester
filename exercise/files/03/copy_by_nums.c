@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void copyByChars(FILE* input, FILE* output) {
-	int character;
+void copyByNums(FILE* input, FILE* output) {
+	int number;
 	
-	while ((character = fgetc(input)) != EOF) { //EOF isn't character
-		fputc(character,output);
+	while ((fscanf(input, "%d", &number)) == 1) {
+		fprintf(output, "%d\n", number);
 	}
 }
-
 
 int main(int argc, char **argv) {
 	FILE* file = fopen(argv[1], "r");
@@ -18,7 +17,7 @@ int main(int argc, char **argv) {
 	if (copy == NULL)
 		return EXIT_FAILURE;
 
-	copyByChars(file, copy);
+	copyByNums(file, copy);
 
 	fclose(file);
 	fclose(copy);
