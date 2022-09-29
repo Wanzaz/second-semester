@@ -27,12 +27,12 @@ int findWinner(FILE *input, FILE *output) {
 
 	return max_runner;
 }
-/* int argc, char **argv */
-int main() {
-	/* if (argc != 3) { */
-	/* 	fprintf(stderr, "Run like this: clang -std=c17 -o main.c prog inputfile outfile;./prog\n"); */
-	/* 	return EXIT_FAILURE; */
-	/* } */
+
+int main(int argc, char **argv) {
+	if (argc != 3) {
+		fprintf(stderr, "Run like this: clang -std=c17 -o main main.c;./main runners.txt winner.txt \n");
+		return EXIT_FAILURE;
+	}
 
 	char *inputpath = "runners.txt";
 	char *outputpath = "winner.txt";
