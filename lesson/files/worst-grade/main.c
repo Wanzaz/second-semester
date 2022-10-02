@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 void worstGrade(FILE *input, FILE *output) {
 	TStudent student;
 
-	while(fscanf(input, "%29s%d%d%d", student.name, &student.grade1, &student.grade2, &student.grade2) == 4) {
+	while(fscanf(input, "%29s%d%d%d", student.name, &student.grade1, &student.grade2, &student.grade3) == 4) {
 		int worst_grade;
 		if (student.grade1 > student.grade2)	
 			worst_grade = student.grade1;
