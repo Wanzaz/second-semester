@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void copyByChars(FILE* input, FILE* output) {
-	int character;
+	char character;
 	
 	while ((character = fgetc(input)) != EOF) {
 		fputc(character,output);
