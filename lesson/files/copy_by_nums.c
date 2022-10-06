@@ -10,8 +10,8 @@ void copyByNums(FILE* input, FILE* output) {
 }
 
 int main() {
-	FILE* file = fopen("numbers.txt", "r");
-	FILE* copy = fopen("copy.txt", "w");
+	FILE* file = fopen("samples/numbers.txt", "r");
+	FILE* copy = fopen("samples/num_copy.txt", "w");
 	if (file == NULL)
 		return EXIT_FAILURE;
 	if (copy == NULL)
