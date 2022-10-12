@@ -1,0 +1,14 @@
+Tonda 1.5
+Terka 2.5
+Eva 3.0
+Olga 2.0
+Petr 4.0
+Elena 1.5
+Anna 3.5
+Karolina 1.5
+Zita 4.5
+David 3.0
+Igor 4.5
+Jan 2.0
+Ota 1.0
+Sandra 4.0

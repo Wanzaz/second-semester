@@ -1,0 +1,16 @@
+Jakub 4.5
+Honza 4.0
+Karel 4.0
+Jana 3.0
+Olin 1.5
+Pavel 2.5
+Petra 1.0
+Martin 3.5
+Hana 1.0
+Pavla 2.0
+Matej 3.0
+Nina 2.0
+Nada 3.5
+Martina 5.0
+Ivan 4.0
+Krista 3.5
