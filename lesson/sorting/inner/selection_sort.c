@@ -36,20 +36,20 @@ void swap(int *xp, int *yp) {
 }
  
 void selectionSort(int array[], int n) {
-	int min_idx;
+    int min_idx;
 
-	// One by one move boundary of unsorted subarray
-	for (int i = 0; i < n - 1; i++) {
-		// Find the minimum element in unsorted array
-		min_idx = i;
-		for (int j = i + 1; j < n; j++) {
-			if (array[j] < array[min_idx])
-				min_idx = j;
-		}
-		// Swap the found minimum element with the first element
-		/* if(min_idx != i) */
-		swap(&array[min_idx], &array[i]);
-	}
+    // One by one move boundary of unsorted subarray
+    for (int i = 0; i < n - 1; i++) {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (array[j] < array[min_idx])
+                min_idx = j;
+        }
+        // Swap the found minimum element with the first element
+        /* if(min_idx != i) */
+        swap(&array[min_idx], &array[i]);
+    }
 }
  
 void printArray(int array[], int size) {
