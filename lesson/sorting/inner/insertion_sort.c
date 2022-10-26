@@ -14,23 +14,21 @@ void insertionSort(int array[], int n);
 void printArray(int array[], int n);
 
  
-int main() 
-{
-	int array[] = {2, 8, 7, 1, 5, 4, 3, 6, 9, 10, 1};
-	int n = sizeof(array) / sizeof(array[0]);
+int main() {
+    int array[] = {2, 8, 7, 1, 5, 4, 3, 6, 9, 10, 1};
+    int n = sizeof(array) / sizeof(array[0]);
 
-	printArray(array, n);
+    printArray(array, n);
 
-	insertionSort(array, n);
-	printf("Sorted array: \n");
-	printArray(array, n);
+    insertionSort(array, n);
+    printf("Sorted array: \n");
+    printArray(array, n);
 
-	return 0;
+    return 0;
 }
 
 
-void insertionSort(int array[], int n) 
-{
+void insertionSort(int array[], int n) {
     int key, j;
     for (int i = 1; i < n; i++) 
 	{
@@ -49,8 +47,7 @@ void insertionSort(int array[], int n)
     }
 }
  
-void printArray(int array[], int n) 
-{
+void printArray(int array[], int n) {
     for (int i = 0; i < n; i++)
         printf("%d ", array[i]);
     printf("\n");
