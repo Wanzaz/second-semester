@@ -1,10 +1,10 @@
 /* O(n) = Linear
- *		- worst case O(n²)
+ * 	    - worst case O(n²)
  * Os(S(n)) = O(1) - Linear
  *			- In situ
- *	Naturality = YES
- *	Stability = YES
- *	Sequencity = YES
+ * Naturality = YES
+ * Stability = YES
+ * Sequencity = YES
  * */
 
 #include <math.h>
@@ -19,10 +19,10 @@ int main() {
     int n = sizeof(array) / sizeof(array[0]);
 
 	printArray(array, n);
- 
-    insertionSort(array, n);
+
+	insertionSort(array, n);
 	printf("Sorted array: \n");
-    printArray(array, n);
+	printArray(array, n);
  
     return 0;
 }

@@ -16,16 +16,15 @@ void selectionSort(int array[], int n);
  
 
 // Driver program to test above functions
-int main()
-{
-    int array[] = {9, 4, 1, 8, 1, 2, 6, 3, 5, 7};
-    int n = sizeof(array)/sizeof(array[0]);
+int main() {
+	int array[] = {9, 4, 1, 8, 1, 2, 6, 3, 5, 7};
+	int n = sizeof(array)/sizeof(array[0]);
 
 	printArray(array, n);
-    selectionSort(array, n);
-    printf("Sorted array: \n");
-    printArray(array, n);
-    return 0;
+	selectionSort(array, n);
+	printf("Sorted array: \n");
+	printArray(array, n);
+	return 0;
 }
 
 
