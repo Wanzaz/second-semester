@@ -3,18 +3,18 @@
 #include <string.h>
 
 
-int pocetBodu(const char *vzor, const char *odpoved) {
-	int suma = 0;
+int numberOfPoints(const char *pattern, const char *answer) {
+	int sum = 0;
 
-	for (int i = 0; vzor[i] != '\0'; i++) {
-		suma += (vzor[i] == odpoved[i]) ? 1 : 0;
+	for (int i = 0; pattern[i] != '\0'; i++) {
+		sum += (pattern[i] == answer[i]) ? 1 : 0;
 	}
 
-	return suma;
+	return sum;
 }
 
 
-void vysledky(FILE *vstup, FILE *vystup, const char *vzor) {
+void results(FILE *vstup, FILE *vystup, const char *vzor) {
 	char zak[3 + 1];
 	int delka = strlen(vzor);
 	char format[20];
@@ -22,34 +22,34 @@ void vysledky(FILE *vstup, FILE *vystup, const char *vzor) {
 	char odpovedi[delka + 1];
 
 	while (fscanf(vstup, format, zak , odpovedi) == 2) {
-		fprintf(vystup, "%s %d\n", zak, pocetBodu(vzor,odpovedi));
+		fprintf(vystup, "%s %d\n", zak, numberOfPoints(vzor,odpovedi));
 	}
 }
 
-FILE *parametr(int poradi, char *mod, int argc, char *argv[]) {
+FILE *parameter(int sequence, char *mod, int argc, char *argv[]) {
 	if (strcmp(mod, "r") == 0) {
-		if (argc <= poradi ||
-				strcmp(argv[poradi], "--") == 0)
+		if (argc <= sequence ||
+				strcmp(argv[sequence], "--") == 0)
 			return stdin;
 	
 	}
 	else if (strcmp(mod, "w") == 0) {
-		if (argc <= poradi ||
-				strcmp(argv[poradi], "--") == 0)
+		if (argc <= sequence ||
+				strcmp(argv[sequence], "--") == 0)
 			return stdout;
 		
 	}
 	else 
 		return NULL;
 
-	return fopen(argv[poradi], mod);
+	return fopen(argv[sequence], mod);
 }
 
 
 int main(int argc, char **argv) {
 
-	FILE *in = parametr(1, "r", argc, argv);
-	FILE *out = parametr(2, "w", argc, argv);
+	FILE *in = parameter(1, "r", argc, argv);
+	FILE *out = parameter(2, "w", argc, argv);
 
 
 	if (in == NULL || out == NULL) {
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	vysledky(in, out, "ABCDABCDAB");
+	results(in, out, "ABCDABCDAB");
 
 
 	if (in != stdin) fclose(in);
