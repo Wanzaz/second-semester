@@ -7,7 +7,10 @@
 /* int sizeOfFile(FILE *input, int max_size); */
 void readingFileToArray(FILE *output, float array[]);
 void insertionSort(float array[], int n);
+void insertionSortWithStopAtStart(float array[], int n);
+void insertionSortWithStopAtEnd(float array[], int n);
 void printArray(FILE *output, float array[], int n);
+void printArrayWithStop(FILE *output, float array[], int n);
 void swap(float *xp, float *yp);
 void selectionSort(float array[], int n);
 
@@ -15,7 +18,7 @@ void selectionSort(float array[], int n);
 int main(int argc, char **argv) {
 
 	if (argc != 2) {
-		fprintf(stderr, "Run like this: gcc main.c; ./a.out inputfile\n");
+		fprintf(stderr, "Run like this: clang main.c; ./a.out inputfile\n");
 		return EXIT_FAILURE;
 	}
 
@@ -29,7 +32,7 @@ int main(int argc, char **argv) {
 
 	int size;
 	fscanf(file, "%d", &size);
-	float array[size];
+	float array[size + 1];
 	readingFileToArray(file, array);
 
 	printf("Unsorted array: \n");
@@ -37,8 +40,9 @@ int main(int argc, char **argv) {
 
 	printf("Sorted array: \n");
 	/* insertionSort(array, size); */
-	selectionSort(array, size);
-	printArray(stdout, array, size);
+	/* selectionSort(array, size); */
+	insertionSortWithStopAtStart(array, size + 1);
+	printArrayWithStop(stdout, array, size);
 
 	/* int size = sizeOfFile(file,  MAX); */
 	return 0;
@@ -63,7 +67,6 @@ void readingFileToArray(FILE *output, float array[]) {
 		array[i] = number;
 		i++;
 	}
-
 }
 
 void insertionSort(float array[], int n) {
@@ -86,7 +89,47 @@ void insertionSort(float array[], int n) {
         array[j + 1] = key;
     }
 }
+
+void insertionSortWithStopAtStart(float array[], int n) {
+    int j;
+	float key;
+
+    for (int i = 2; i < n - 1; i++) {
+		array[0] = array[i];
+        key = array[i];
+		j = i;
  
+        while (array[j - 1] > key) {
+            array[j] = array[j - 1];
+            j = j - 1;
+        }
+        array[j] = key;
+    }
+}
+ 
+void insertionSortWithStopAtEnd(float array[], int n) {
+    int j;
+	float key;
+
+    for (int i = n - 2; i > 0; i--) {
+		array[n - 1] = array[i];
+        key = array[i];
+		j = i;
+ 
+        while (array[j + 1] < key) {
+            array[j] = array[j + 1];
+            j = j + 1;
+        }
+        array[j] = key;
+    }
+}
+
+void printArrayWithStop(FILE *output, float array[], int n) {
+    for (int i = 1; i < n; i++) // i = 1 because of the insertionSortWithStop
+        fprintf(output, "%0.1f ", array[i]);
+    printf("\n");
+}
+
 void printArray(FILE *output, float array[], int n) {
     for (int i = 0; i < n; i++)
         fprintf(output, "%0.1f ", array[i]);
