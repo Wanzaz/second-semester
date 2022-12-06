@@ -29,21 +29,21 @@ int main() {
 
 
 void insertionSort(int array[], int n) {
-    int key, j;
+    int current, j;
     for (int i = 1; i < n; i++) 
 	{
-        key = array[i];
+        current = array[i];
         j = i - 1;
  
         /* Move elements of array[0..i-1], that are
           greater than key, to one position ahead
           of their current position */
-        while (j >= 0 && array[j] > key) 
+        while (j >= 0 && array[j] > current) 
 		{
             array[j + 1] = array[j];
-            j = j - 1;
+            j--;
         }
-        array[j + 1] = key;
+        array[j + 1] = current;
     }
 }
  
