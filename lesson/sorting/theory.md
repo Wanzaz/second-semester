@@ -34,10 +34,6 @@
 	* example = going through elements of array, matrix, list, etc.
 
 #### O(n log (n)) 
-* **Linear** = The calculation time is proportional to the number of processed elements
-	* example = going through elements of array, matrix, list, etc.
-
-#### O(n) 
 * **Linearithmic** = Usually 2 nested cycles - one with linear and inner with Logarithmic complexity
 
 #### O(n**2) 
