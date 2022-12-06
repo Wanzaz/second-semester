@@ -15,11 +15,15 @@ void swap(int *xp, int *yp);
 
  
 int main() {
-    int array[] = {2, 8, 7, 1, 5, 4, 3, 6, 9, 10, 1};
+    int array[] = {2, 8, 7, 1, 5, 4, 3, 6, 9, 10, 0};
     int n = sizeof(array) / sizeof(array[0]);
 
+    printf("Unsorted array: \n");
     printArray(array, n);
+
+    printf("Process of sorting array: \n");
     bubbleSort(array, n);
+
     printf("Sorted array: \n");
     printArray(array, n);
 
@@ -45,6 +49,7 @@ void bubbleSort(int array[], int n) {
 			}
 		}
 		if (swapped == false) break;
+		printArray(array, n);
 	}
 }
  
