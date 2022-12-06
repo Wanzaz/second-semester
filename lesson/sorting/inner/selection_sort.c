@@ -1,7 +1,7 @@
 /* T(n) = O(n²) - quadratic
  *		- Two nested cycles with linear complexity
  * Os(S(n)) = O(1) - linear
- *		- In situ
+ *		- In situ = In-place Algorithm
  * Natural = NO 
  * Sequential = YES
  * Stability = NO
@@ -15,7 +15,6 @@ void swap(int *xp, int *yp);
 void selectionSort(int array[], int n);
  
 
-// Driver program to test above functions
 int main() {
     int array[] = {9, 4, 1, 8, 1, 2, 6, 3, 5, 7};
     int n = sizeof(array)/sizeof(array[0]);
