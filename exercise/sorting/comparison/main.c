@@ -62,7 +62,7 @@ void selectionSort(float array[], int n) {
     
 void bubbleSort(float array[], int n) {
     for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - 1; j++) {
+        for (int j = 0; j < n - 2; j++) {
             if (array[j] > array[j + 1]) {
                 swap(&array[j], &array[j + 1]);
             }
@@ -114,6 +114,54 @@ void shakerSort(float array[], int n) {
 	}
 }
 
+void swapQ(float array[], int x, int y) {
+	float temp = array[x];
+	array[x] = array[y];
+	array[y] = temp;
+}
+
+static inline
+int partition(float array[], int start, int end) {
+	int p = (start + end)/2; // or other selection
+	float pivot = array[p];
+	swapQ(array, p, start); // pivot removal on site
+
+	int left = start;
+	int right = end + 1;
+
+	while (true) {
+		while (array[++left] < pivot) {
+			if (left == end) break; // find element >= pivot
+		}
+		while (pivot < array[--right]) {
+			// this line doesn't have to be here - it shouldn't be executed in any time
+			/* if (left == end) break; // find element >= pivot */ 
+		}
+
+		if (left >= right) break;
+
+		swapQ(array,left, right);
+	} // while
+	
+	swapQ(array, right, start); // inserting pivot on final position
+	return right;
+}
+
+void _quickSort(float array[], int start, int end) {
+
+	if (start >= end) return;
+
+	int pivot_position = partition(array, start, end);
+
+	_quickSort(array, start, pivot_position - 1);
+	_quickSort(array, pivot_position + 1, end);
+}
+
+void quickSort(float array[], int n) {
+	_quickSort(array, 0, n - 1);
+	
+}
+
 bool isSorted(float numbers[], int size) {
     for (int index = 0; index < size - 1; index++) {
         if (numbers[index] > numbers[index + 1]) {
@@ -152,7 +200,9 @@ void test(FILE* data, FILE* to, char name[], void (*sort)(float[], int)) {
 	double time_taken = ((double)time/CLOCKS_PER_SEC);
     printf("[TEST] %s: %s - %fs\n", name, isSorted(numbers, size) ? "PASS" : "FAIL", time_taken);
     put(to, numbers, size);
+	/* return time_taken; */
 }
+
 
 int main(void) {
     FILE* from = fopen("from.txt", "r");
@@ -161,7 +211,6 @@ int main(void) {
         return 1;
     }
 
-	double time_taken;
 
     test(from, to, "insertion", insertionSort);
     test(from, to, "insertionWithBreak", insertionSortWithBreak);
@@ -169,6 +218,7 @@ int main(void) {
     test(from, to, "ripple", rippleSort);
     test(from, to, "selection", selectionSort);
     test(from, to, "shaker", shakerSort);
+    test(from, to, "quickSort", quickSort);
 	printf("\n[FAIL-INFO] Insertion sort with break fails because it has it's break\n");
 
     fclose(from);
