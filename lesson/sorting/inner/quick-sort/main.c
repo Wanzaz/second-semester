@@ -16,10 +16,10 @@
 
 
 // function to swap elements
-void swap(float *xp, float *yp) {
-	float temp = *xp;
-	*xp = *yp;
-	*yp = temp;
+void swap(float array[], int x, int y) {
+	float temp = array[x];
+	array[x] = array[y];
+	array[y] = temp;
 }
 
 // function to find the partition position
@@ -27,7 +27,7 @@ static inline
 int partition(float array[], int start, int end) {
 	int p = (start + end)/2; // or other selection
 	float pivot = array[p];
-	swap(&array[p], &array[start]); // pivot removal on site
+	swap(array, p, start); // pivot removal on site
 
 	int left = start;
 	int right = end + 1;
@@ -43,10 +43,10 @@ int partition(float array[], int start, int end) {
 
 		if (left >= right) break;
 
-		swap(&array[left], &array[right]);
+		swap(array,left, right);
 	} // while
 	
-	swap(&array[right], &array[start]); // inserting pivot on final position
+	swap(array, right, start); // inserting pivot on final position
 	return right;
 }
 
