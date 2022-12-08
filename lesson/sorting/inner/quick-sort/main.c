@@ -1,7 +1,7 @@
 /* T(n) = O(n log n) - logarithmic
  *		- O(n²) = worst case 
  * Os(n) = O(n)
- *		 - In Situ = In Place
+ *		 - NOT In Place
  * Natural = YES (depends on the pivot)
  * Sequential = YES 
  * Stability = NO
