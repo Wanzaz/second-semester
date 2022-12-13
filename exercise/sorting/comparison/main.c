@@ -5,8 +5,6 @@
 #include <time.h>
 
 
-
-
 /* INSERTION SORT
  * O(n²) = Quadratic
  * Os(S(n)) = O(1) - Linear
@@ -17,20 +15,15 @@
  * */
 
 void insertionSort(float array[], int n) {
-    int j;
-	float key;
-
-    for (int i = 1; i < n; i++) 
-	{
-        key = array[i];
-        j = i - 1;
+    for (int i = 1; i < n; i++) {
+        float current = array[i];
+        int j = i - 1;
  
-        while (j >= 0 && array[j] > key) 
-		{
+        while (j >= 0 && array[j] > current) {
             array[j + 1] = array[j];
-            j = j - 1;
+            j--;
         }
-        array[j + 1] = key;
+        array[j + 1] = current;
     }
 }
 
@@ -94,7 +87,7 @@ void selectionSort(float array[], int n) {
 
 void bubbleSort(float array[], int n) {
     for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - 2; j++) {
+        for (int j = 0; j < n - 1; j++) {
             if (array[j] > array[j + 1]) {
                 swap(&array[j], &array[j + 1]);
             }
