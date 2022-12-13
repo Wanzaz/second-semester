@@ -5,6 +5,17 @@
 #include <time.h>
 
 
+
+
+/* INSERTION SORT
+ * O(n²) = Quadratic
+ * Os(S(n)) = O(1) - Linear
+ *          - In place
+ * Naturality = YES
+ * Stability = YES
+ * Sequencity = YES
+ * */
+
 void insertionSort(float array[], int n) {
     int j;
 	float key;
@@ -46,6 +57,17 @@ void swap(float *xp, float *yp) {
     *xp = *yp;
     *yp = temp;
 }
+
+
+/* SELECTION SORT
+ * T(n) = O(n²) - quadratic
+ *		- Two nested cycles with linear complexity
+ * Os(S(n)) = O(1) - linear
+ *		- In situ = In-place Algorithm
+ * Natural = NO 
+ * Sequential = YES
+ * Stability = NO
+ * */
  
 void selectionSort(float array[], int n) {
     int min_idx;
@@ -59,7 +81,17 @@ void selectionSort(float array[], int n) {
         swap(&array[min_idx], &array[i]);
     }
 }
-    
+
+
+/* BUBBLE SORT
+ * O(n²) = Quadratic
+ * Os(S(n)) = O(1) - Linear
+ *          - In place
+ * Naturality = NO (but optimized versions are)
+ * Stability = YES
+ * Sequencity = YES
+ * */
+
 void bubbleSort(float array[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - 2; j++) {
@@ -114,6 +146,18 @@ void shakerSort(float array[], int n) {
 	}
 }
 
+
+/* QUICK SORT
+ * T(n) = O(n log n) - linearithmic
+ *		- O(n²) = worst case 
+ * Os(n) = O(n)
+ *		 - NOT In Place
+ * Natural = YES (depends on the pivot)
+ * Sequential = YES 
+ * Stability = NO
+ * Recursive
+ * */
+
 void swapQ(float array[], int x, int y) {
 	float temp = array[x];
 	array[x] = array[y];
@@ -161,6 +205,18 @@ void quickSort(float array[], int n) {
 	_quickSort(array, 0, n - 1);
 	
 }
+
+
+/* MERGE SORT
+ * T(n) = O(n log n) - linearithmic
+ * Os(n) = O(n)
+ *		 - Not In Place
+ * Natural = NO 
+ * Sequential = YES 
+ * Stability = YES
+ * Recursive
+ * */
+
 
 bool isSorted(float numbers[], int size) {
     for (int index = 0; index < size - 1; index++) {
