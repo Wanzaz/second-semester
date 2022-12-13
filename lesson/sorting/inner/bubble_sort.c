@@ -1,6 +1,7 @@
-/* O(n²) = Quadratic
+/* BUBBLE SORT
+ * O(n²) = Quadratic
  * Os(S(n)) = O(1) - Linear
- *          - In situ
+ *          - In place
  * Naturality = NO (but optimized versions are)
  * Stability = YES
  * Sequencity = YES

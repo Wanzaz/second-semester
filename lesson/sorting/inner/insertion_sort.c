@@ -1,7 +1,7 @@
-/* O(n) = Linear
- *      - worst case O(n²)
+/* INSERTION SORT
+ * O(n) = Quadratic
  * Os(S(n)) = O(1) - Linear
- *          - In situ
+ *          - In place
  * Naturality = YES
  * Stability = YES
  * Sequencity = YES

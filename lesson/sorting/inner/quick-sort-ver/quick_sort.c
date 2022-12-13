@@ -1,4 +1,5 @@
-/* T(n) = O(n log n) - logarithmic
+/* QUICK SORT
+ * T(n) = O(n log n) - linearithmic
  *		- O(n²) = worst case 
  * Os(n) = O(n)
  *		 - NOT In Place

@@ -1,4 +1,5 @@
-/* T(n) = O(n²) - quadratic
+/* SELECTION SORT
+ * T(n) = O(n²) - quadratic
  *		- Two nested cycles with linear complexity
  * Os(S(n)) = O(1) - linear
  *		- In situ = In-place Algorithm

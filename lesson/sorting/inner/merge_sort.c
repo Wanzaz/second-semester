@@ -1,4 +1,5 @@
-/* T(n) = O(n log n) - logarithmic
+/* MERGE SORT
+ * T(n) = O(n log n) - linearithmic
  * Os(n) = O(n)
  *		 - Not In Situ
  * Natural = NO 
