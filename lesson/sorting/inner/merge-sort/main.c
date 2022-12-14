@@ -22,12 +22,8 @@ void merge(float array[], float temp_array[], int start, int middle, int end) {
 	int left = start;
 	int right = middle + 1;
 
-	while (left <= middle && right <= end) {
-		if (array[left] <= array[right]) {
-			temp_array[temp++] = array[left++];
-		} else {
-			temp_array[temp++] = array[right++];
-		}
+	 while (left <= middle && right <= end) {
+		temp_array[temp++] = array[left] <= array[right] ? array[left++] : array[right++];
 	}
 
 	while (left <= middle) {
