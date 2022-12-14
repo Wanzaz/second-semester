@@ -1,3 +1,6 @@
+# Debugger
+*.vimspector.json
+
 # Prerequisites
 *.d
 
