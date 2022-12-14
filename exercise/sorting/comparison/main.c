@@ -210,6 +210,50 @@ void quickSort(float array[], int n) {
  * Recursive
  * */
 
+static inline
+void merge(float array[], float temp_array[], int start, int middle, int end) {
+	int temp = start;
+	int left = start;
+	int right = middle + 1;
+
+	 while (left <= middle && right <= end) {
+		temp_array[temp++] = array[left] <= array[right] ? array[left++] : array[right++];
+	}
+
+	while (left <= middle) {
+		temp_array[temp++] = array[left++];
+	}
+	while (right <= end) {
+		temp_array[temp++] = array[right++];
+	}
+}
+
+void copyPartOfArray(float array[], float temp_array[], int start, int end) {
+	for (int index = start; index <= end; index++) {
+		array[index] = temp_array[index];
+	}
+}
+
+void _mergeSort(float array[], float temp_array[], int start, int end) {
+
+	if (start < end) {
+		int middle = (start + end) / 2;
+
+		_mergeSort(array, temp_array, start, middle);
+		_mergeSort(array, temp_array, middle + 1, end);
+
+		merge(array, temp_array, start, middle, end);
+
+		/* array[start, end] = temp_array[start, end]; */
+		copyPartOfArray(array, temp_array, start, end);
+	}
+}
+
+void mergeSort(float array[], int n) {
+	float temp_array[n];
+	_mergeSort(array, temp_array, 0, n - 1);
+}
+
 
 bool isSorted(float numbers[], int size) {
     for (int index = 0; index < size - 1; index++) {
@@ -268,6 +312,7 @@ int main(void) {
     test(from, to, "selection", selectionSort);
     test(from, to, "shaker", shakerSort);
     test(from, to, "quickSort", quickSort);
+	test(from, to, "mergeSort", mergeSort);
 	printf("\n[FAIL-INFO] Insertion sort with break fails because it has it's break\n");
 
     fclose(from);
