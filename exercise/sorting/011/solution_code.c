@@ -82,7 +82,7 @@ void roztridPole(TPoleOsob *osoby, int pivot)
   while(levy < pravy)
   {
     while(levy < pravy && osoby->prvek[levy].vek <= pivot) levy += 1;
-    while(levy < pravy && osoby->prvek[pravy].vek >= pivot) pravy -= 1;
+    while(levy < pravy && osoby->prvek[pravy].vek > pivot) pravy -= 1;
 
     if (levy >= pravy) return;
 
