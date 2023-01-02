@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define BLOCK 32
 #define MAXN 100
 #define SWAP(T, A, B) ({ T h = A; A = B; B = h; })
+
+/* TODO: 
+ * 1.function for freeing memory
+ * 2. function for loadPeople
+ * */
 
 typedef struct _person {
     char name[20+1];
@@ -18,7 +24,6 @@ TArrayOfPeople * loadPeople(FILE *file) {
     TArrayOfPeople * array = malloc(sizeof(TArrayOfPeople));
     if (array == NULL) return NULL;
 
-#define BLOCK 32
     array->value= NULL;
     array->length = 0;
     int index = 0;
@@ -70,8 +75,7 @@ void swap(Tperson *array, int a, int b) {
 void sortArray(TArrayOfPeople *people, int pivot) {
     int left = 0;
     int right = people->length - 1;
-    while(left < right)
-    {
+    while(left < right) {
         while(left < right && people->value[left].age < pivot) left++;
         while(left < right && people->value[right].age >= pivot) right--;
 
@@ -97,6 +101,9 @@ void sortFile(FILE *file, int pivot) {
 
     sortArray(people, pivot);
     writingArray(stdout, people);
+
+    free(people->value);
+    free(people);
 }
 
 
