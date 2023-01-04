@@ -37,11 +37,9 @@ int mergeSection(int section_length, FILE *tape, FILE *temp1, FILE *temp2)
 
     bool inside1 = tryToRead(temp1, section_length, &element1, &elements1);
     bool inside2 = tryToRead(temp2, section_length, &element2, &elements2);
-    printf("Hallo 1");
 
 
     while (inside1 && inside2) {
-        printf("Hallo 2");
         if (element1 <= element2) {
             writeElement(tape, element1);
             inside1 = tryToRead(temp1, section_length, &element1, &elements1);
@@ -54,14 +52,12 @@ int mergeSection(int section_length, FILE *tape, FILE *temp1, FILE *temp2)
     }
 
     while (inside1) {
-        printf("Hallo 3");
         writeElement(tape, element1);
         written++;
         inside1 = tryToRead(temp1, section_length, &element1, &elements1);
     }
 
     while (inside2) {
-        printf("Hallo 4");
         writeElement(tape, element2);
         written++;
         inside2 = tryToRead(temp2, section_length, &element2, &elements2);
@@ -82,7 +78,7 @@ int main ()
     }
 
     int number_of_written_nums = mergeSection(TUPLEOFTWO, output, numbers1, numbers2);
-    printf("%d", number_of_written_nums);
+    printf("%d\n", number_of_written_nums);
 
     fclose(numbers1);
     fclose(numbers2);
