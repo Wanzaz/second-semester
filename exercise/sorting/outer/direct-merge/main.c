@@ -2,46 +2,76 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool read(FILE *file, int *element)
+#define TUPLEOFTWO 2
+
+
+bool readElement(FILE *file, int *element)
 {
     return (fscanf(file, "%d", element) == 1);
 }
 
-bool write(FILE *file, int element)
+bool writeElement(FILE *file, int element)
 {
     return fprintf(file, "%d ", element);
 }
 
-void mergeTwoSortedFiles(FILE *inputa, FILE *inputb, FILE *output) 
+bool tryToRead(FILE *tape, int limit, int *element, int *plural_read) 
 {
-    int a, b;
+    // reads only inside the block given between
+    bool read = (*plural_read < limit) && (readElement(tape, element) == 1);
 
-    bool aokay = read(inputa, &a);
-    bool bokay = read(inputb, &b);
+    if (read) plural_read++;
 
-    while (aokay && bokay) {
-        if (a <= b) {
-            write(output, a);
-            aokay = read(inputa, &a);
-        } else {
-            write(output, b);
-            bokay = read(inputb, &b);
-        }
-    }
-
-    while (aokay) {
-        write(output, a);
-        aokay = read(inputa, &a);
-    }
-
-    while (bokay) {
-        write(output, b);
-        bokay = read(inputb, &b);
-    }
-
+    return read;
 }
 
-int main (void) 
+int mergeSection(int section_length, FILE *tape, FILE *temp1, FILE *temp2) 
+{
+    // length section is tuple (2)
+    int written = 0;
+    int elements1 = 0;
+    int elements2 = 0;
+
+    int element1;
+    int element2;
+
+    bool inside1 = tryToRead(temp1, section_length, &element1, &elements1);
+    bool inside2 = tryToRead(temp2, section_length, &element2, &elements2);
+    printf("Hallo 1");
+
+
+    while (inside1 && inside2) {
+        printf("Hallo 2");
+        if (element1 <= element2) {
+            writeElement(tape, element1);
+            inside1 = tryToRead(temp1, section_length, &element1, &elements1);
+        } else {
+            writeElement(tape, element2);
+            inside2 = tryToRead(temp2, section_length, &element2, &elements2);
+        }
+
+        written++;
+    }
+
+    while (inside1) {
+        printf("Hallo 3");
+        writeElement(tape, element1);
+        written++;
+        inside1 = tryToRead(temp1, section_length, &element1, &elements1);
+    }
+
+    while (inside2) {
+        printf("Hallo 4");
+        writeElement(tape, element2);
+        written++;
+        inside2 = tryToRead(temp2, section_length, &element2, &elements2);
+    }
+
+    return written;
+}
+
+
+int main () 
 {
     FILE *numbers1 = fopen("numbers1.txt", "r");
     FILE *numbers2 = fopen("numbers2.txt", "r");
@@ -51,7 +81,8 @@ int main (void)
         return EXIT_FAILURE;
     }
 
-    mergeTwoSortedFiles(numbers1, numbers2, output);
+    int number_of_written_nums = mergeSection(TUPLEOFTWO, output, numbers1, numbers2);
+    printf("%d", number_of_written_nums);
 
     fclose(numbers1);
     fclose(numbers2);
