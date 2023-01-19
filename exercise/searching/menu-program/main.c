@@ -31,7 +31,7 @@ int seqSearch(int array[], int n, int key)
     else return -1;
 }
 
-int seqSearchSimplified(int array[], int n, int key)//
+int seqSearchSimplified(int array[], int n, int key)
 {
     int i = 0;
     
@@ -175,6 +175,7 @@ void testSearchAlg(FILE* data, char name[], int (*search)(int[], int, int))
     int returned_number = search(numbers, n, key);
 
     printf("[SEARCHING] %s: %s - on positon %d\n", name, (returned_number != -1) ? "FOUND" : "NOT FOUND", returned_number);
+    rewind(data);
 }
 
 void pause(void)
@@ -241,17 +242,17 @@ int main (int argc, char *argv[])
                 testSearchAlg(inputfile, "seqSearch", seqSearch);
                 break;
             case 2:
-                /* testSearchAlg(inputfile, "seqSearchSimplified", seqSearchSimplified); */
+                testSearchAlg(inputfile, "seqSearchSimplified", seqSearchSimplified);
                 break;
             case 3:
                 testSearchAlg(inputfile, "seqStopSearch", seqStopSearch);
                 break;
             case 4:
-                /* if (testMerge(inputfile, outputfile, "mergeSort", mergeSort) == 0) { */
-                /*     testSearchAlg(inputfile, "seqSortSearch", seqSortSearch); */
-                /* } else { */
-                /*     testSearchAlg(outputfile, "seqSortSearch", seqSortSearch); */
-                /* } */
+                if (testMerge(inputfile, outputfile, "mergeSort", mergeSort) == 0) {
+                    testSearchAlg(inputfile, "seqSortSearch", seqSortSearch);
+                } else {
+                    testSearchAlg(outputfile, "seqSortSearch", seqSortSearch);
+                }
                 break;
             case 5:
                 break;
