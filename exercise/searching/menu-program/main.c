@@ -127,6 +127,8 @@ void loadFileToArray(FILE* from, int numbers[], int size)
     while (i < size && fscanf(from, "%d", &numbers[i]) == 1) {
         i++;
     }
+
+    rewind(from);
 }
 
 int countNumbers(FILE *input, int array[]) {
@@ -136,6 +138,7 @@ int countNumbers(FILE *input, int array[]) {
 		i++;
 	}
 
+    rewind(input);
 	return i;
 }
 
@@ -144,24 +147,7 @@ void put(FILE* to, int numbers[], int size)
     for (int i = 0; i < size; i++) {
         fprintf(to, "%d\n", numbers[i]);
     }
-}
-
-int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int))
-{ 
-    int numbers[MAXSIZE + 1];
-    int n = countNumbers(data, numbers);
-    rewind(data);
-    loadFileToArray(data, numbers, n);
-    if (isSorted(numbers, n)) {
-        return 0;
-    }
-    int temp_numbers[MAXSIZE + 1];
-
-    sort(numbers, temp_numbers, n);
-
-    printf("[TEST] %s: %s\n", name, isSorted(numbers, n) ? "PASS" : "FAIL");
-    put(to, numbers, n);
-    return 1;
+    rewind(to);
 }
 
 void testSearchAlg(FILE* data, char name[], int (*search)(int[], int, int))
@@ -169,13 +155,33 @@ void testSearchAlg(FILE* data, char name[], int (*search)(int[], int, int))
     int key = 9;
     int numbers[MAXSIZE + 1];
     int n = countNumbers(data, numbers);
-    rewind(data);
     loadFileToArray(data, numbers, n);
 
     int returned_number = search(numbers, n, key);
 
     printf("[SEARCHING] %s: %s - on positon %d\n", name, (returned_number != -1) ? "FOUND" : "NOT FOUND", returned_number);
-    rewind(data);
+}
+
+int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int))
+{ 
+    int numbers[MAXSIZE + 1];
+    int n = countNumbers(data, numbers);
+
+    loadFileToArray(data, numbers, n);
+
+    if (isSorted(numbers, n)) {
+        testSearchAlg(data, "seqSortSearch", seqSortSearch);
+        return 0;
+    }
+
+    int temp_numbers[MAXSIZE + 1];
+
+    sort(numbers, temp_numbers, n);
+
+    printf("[TEST] %s: %s\n", name, isSorted(numbers, n) ? "PASS" : "FAIL");
+    put(to, numbers, n);
+    testSearchAlg(to, "seqSortSearch", seqSortSearch);
+    return 1;
 }
 
 void pause(void)
@@ -226,7 +232,7 @@ int main (int argc, char *argv[])
 	char *outputpath = argv[2];
 
     FILE *inputfile = fopen(inputpath, "r");
-    FILE *outputfile = fopen(outputpath, "w");
+    FILE *outputfile = fopen(outputpath, "w+");
 
 
     int choice = 1;
@@ -248,11 +254,13 @@ int main (int argc, char *argv[])
                 testSearchAlg(inputfile, "seqStopSearch", seqStopSearch);
                 break;
             case 4:
-                if (testMerge(inputfile, outputfile, "mergeSort", mergeSort) == 0) {
-                    testSearchAlg(inputfile, "seqSortSearch", seqSortSearch);
-                } else {
-                    testSearchAlg(outputfile, "seqSortSearch", seqSortSearch);
-                }
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort);
+
+                /* if (testMerge(inputfile, outputfile, "mergeSort", mergeSort) == 0) { */
+                /*     testSearchAlg(inputfile, "seqSortSearch", seqSortSearch); */
+                /* } else { */
+                /*     testSearchAlg(outputfile, "seqSortSearch", seqSortSearch); */
+                /* } */
                 break;
             case 5:
                 break;
