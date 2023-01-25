@@ -68,6 +68,52 @@ int seqSortSearch(int array[], int n, int key)
     else return -1;
 }
 
+int _binarySearchRecursively(int array[], int left, int right, int key)
+{
+    if (left > right) return -1;
+    
+    int middle = (left + right) / 2;
+
+    if (array[middle] == key) {
+        return middle;
+    }
+    if (array[middle] < key) {
+        return _binarySearchRecursively(array, middle + 1, right, key);
+    }
+    else {
+        return _binarySearchRecursively(array, left, middle - 1, key);
+    }
+
+}
+
+int binarySearchRecursively(int array[], int n, int key)
+{
+    return _binarySearchRecursively(array, 0, n - 1, key);
+}
+
+int _binarySearch(int array[], int left, int right, int key)
+{
+    while (left <= right) {
+        int middle = (left + right) / 2;
+
+        if (array[middle] == key) {
+            return middle;
+        }
+        if (array[middle] < key) {
+            left = middle + 1;
+        } else {
+            right = middle - 1;
+        }
+    }
+
+    return -1;
+}
+
+int binarySearch(int array[], int n, int key)
+{
+    return _binarySearch(array, 0, n - 1, key);
+}
+
 
 static inline
 void merge(int array[], int temp_array[], int start, int middle, int end) {
@@ -162,7 +208,7 @@ void testSearchAlg(FILE* data, char name[], int (*search)(int[], int, int))
     printf("[SEARCHING] %s: %s - on positon %d\n", name, (returned_number != -1) ? "FOUND" : "NOT FOUND", returned_number);
 }
 
-int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int))
+int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int), char search_alg_name[], int (*search)(int[], int, int))
 { 
     int numbers[MAXSIZE + 1];
     int n = countNumbers(data, numbers);
@@ -170,7 +216,7 @@ int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int)
     loadFileToArray(data, numbers, n);
 
     if (isSorted(numbers, n)) {
-        testSearchAlg(data, "seqSortSearch", seqSortSearch);
+        testSearchAlg(data, search_alg_name, search);
         return 0;
     }
 
@@ -180,7 +226,7 @@ int testMerge(FILE* data, FILE* to, char name[], void (*sort)(int[],int [], int)
 
     printf("[TEST] %s: %s\n", name, isSorted(numbers, n) ? "PASS" : "FAIL");
     put(to, numbers, n);
-    testSearchAlg(to, "seqSortSearch", seqSortSearch);
+    testSearchAlg(to, search_alg_name, search);
     return 1;
 }
 
@@ -254,17 +300,13 @@ int main (int argc, char *argv[])
                 testSearchAlg(inputfile, "seqStopSearch", seqStopSearch);
                 break;
             case 4:
-                testMerge(inputfile, outputfile, "mergeSort", mergeSort);
-
-                /* if (testMerge(inputfile, outputfile, "mergeSort", mergeSort) == 0) { */
-                /*     testSearchAlg(inputfile, "seqSortSearch", seqSortSearch); */
-                /* } else { */
-                /*     testSearchAlg(outputfile, "seqSortSearch", seqSortSearch); */
-                /* } */
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "seqSortSearch", seqSortSearch);
                 break;
             case 5:
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "binarySearchRecursively", binarySearchRecursively);
                 break;
             case 6:
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "binarySearch", binarySearch);
                 break;
         }
 
