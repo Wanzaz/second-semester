@@ -68,6 +68,19 @@ int seqSortSearch(int array[], int n, int key)
     else return -1;
 }
 
+int seqSortStopSearch(int array[], int n, int key)
+{
+    array[n - 1] = key;
+    int i = 0;
+    
+    while (isLess(array[i], key)) {
+        i++;
+    }
+
+    if (array[i] == key) return i;
+    else return -1;
+}
+
 int _binarySearchRecursively(int array[], int left, int right, int key)
 {
     if (left > right) return -1;
@@ -256,13 +269,14 @@ void menu(void)
 	clear();   
 	printf(
 			"Searching Algorithms:\n"
-			"0..............................exit\n"
-			"1...........sequence-search-general\n"
-			"2........sequence-search-simplified\n"
-			"3........sequence-search-with-break\n"
-			"4...sequence-search-in-sorted-array\n"
-			"5..........binary-search-recurively\n"
-			"6......binary-search-non-recurively\n"
+			"0..................................exit\n"
+			"1...............sequence-search-general\n"
+			"2............sequence-search-simplified\n"
+			"3............sequence-search-with-break\n"
+			"4.......sequence-search-in-sorted-array\n"
+			"5.sequence-search-break-in-sorted-array\n"
+			"6..............binary-search-recurively\n"
+			"7..........binary-search-non-recurively\n"
 			"Choose operation: "
 		  );
 }
@@ -303,9 +317,12 @@ int main (int argc, char *argv[])
                 testMerge(inputfile, outputfile, "mergeSort", mergeSort, "seqSortSearch", seqSortSearch);
                 break;
             case 5:
-                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "binarySearchRecursively", binarySearchRecursively);
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "seqSortStopSearchSearch", seqSortStopSearch);
                 break;
             case 6:
+                testMerge(inputfile, outputfile, "mergeSort", mergeSort, "binarySearchRecursively", binarySearchRecursively);
+                break;
+            case 7:
                 testMerge(inputfile, outputfile, "mergeSort", mergeSort, "binarySearch", binarySearch);
                 break;
         }
