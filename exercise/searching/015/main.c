@@ -3,9 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
 #define MAX 550
-#define SWAP(T, A, B) do { T h = A; A = B; B = h; } while(0)
 
 
 typedef struct 
@@ -49,22 +47,15 @@ void clear(void)
 	#endif
 }
 
-int menu()
+void menu()
 {
-    int option;
+    clear();
+    printf("End of program ................0\n");
     printf("Show all names ............... 1\n");
     printf("Sort names by alphabet ....... 2\n");
     printf("Who has name day ..............3\n");
     printf("When does have name day .......4\n");
-    printf("End of program ................0\n");
     printf("Enter your option 0-5: ");
-    scanf("%d", &option);
-    while (option < 0 || option > 4) {
-        printf("Enter your option 0-5: ");
-        scanf("%d", &option);
-    }
-
-    return option;
 }
 
 void showNames(FILE *outputs, Tname array[], int n)
@@ -131,7 +122,12 @@ int main(void) {
     printf("Number of sorted names: %d.\n", quantity);
     fclose(file);
 
-    while ((option = menu())!=0) {
+    option = 1;
+
+    while (option !=0) {
+        menu();
+        scanf("%d", &option);
+
         switch (option) {
             case 1: showNames(stdout, names, quantity);
                 break;
@@ -159,8 +155,10 @@ int main(void) {
                         printf("%s has a name day %d. %d.\n",names[position].name, names[position].day,names[position].month);
                     break;
         }
-        pause();
-        clear();
+
+        if (option != 0) {
+            pause();
+        }
     }
 
     printf("End of a program\n");
