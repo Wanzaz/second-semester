@@ -70,13 +70,14 @@ void showNames(FILE *outputs, Tname array[], int n)
 void sortNames(Tname array[], int n)
 {
     for (int i = 1; i < n; i++) {
-        int inner = i;
         Tname current = array[i];
-        while (inner > 0 && strcmp(current.name, array[i - 1].name) > 0) {
-            array[inner] = array[inner - 1];
-            inner--;
+        int j = i - 1;
+
+        while (j >= 0 && strcmp(current.name, array[j].name) < 0) {
+            array[j + 1] = array[j];
+            j--;
         }
-        array[inner] = current;
+        array[j + 1] = current;
     }
 }
 
