@@ -295,6 +295,11 @@ int main (int argc, char *argv[])
     FILE *outputfile = fopen(outputpath, "w+");
 
 
+    if (inputfile == NULL || outputfile == NULL) {
+		fprintf(stderr, "File cannot be opened!");
+		return EXIT_FAILURE;
+	}
+
     int choice = 1;
 
     while (choice != 0) {
