@@ -3,144 +3,158 @@
 #include <stdbool.h>
 #include <string.h>
 
-# define MAXN 100
 
-typedef struct
+typedef struct person
 {
     char name[21];
     int age;
     bool occupied;
-} Telement;
+    struct person *next;
+} Tperson;
 
 typedef struct
 {
-    Telement *value;
-    int n;
+    Tperson *array;
+    int length;
 
 } ThashMap;
 
-ThashMap loadElements(int length) {
-    /* map = malloc(sizeof(ThashMap)); */
-    ThashMap map;
+typedef struct
+{
+    char *text;
+    void (*function)(ThashMap *hashmap);
+} Action;
 
-    map.value = malloc(length*sizeof(Telement));
+// dynamic array 
+/* ThashMap loadElements(int length) { */
+/*     /1* map = malloc(sizeof(ThashMap)); *1/ */
+/*     ThashMap map; */
 
-    map.n = length;
+/*     map.value = malloc(length*sizeof(Telement)); */
 
-    return map;
+/*     map.n = length; */
+
+/*     return map; */
+/* } */
+
+void writeOutPerson(Tperson *person)
+{
+    printf("%s %i\n", person->name, person->age);
+    if (person->next) {
+        writeOutPerson(person->next);
+    }
 }
 
-void writeOut (ThashMap *hashmap, int n)
+void writeOutMap(ThashMap *hashmap)
 {
-    for(int i = 0; i < n - 1; i++) {
-        if (hashmap->value[i].occupied == false) { // FIXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            printf("Name: %s Age: %d\n", hashmap->value[i].name, hashmap->value[i].age);
+    for(int i = 0; i < hashmap->length; i++) {
+        if (hashmap->array[i].occupied) {
+            writeOutPerson(&hashmap->array[i]);
         }
     }
-    /** Pohlidejte si, ze obsazeno je 1, 0 totiz znamena, ze polozka neexistuje, podle toho vypisujte,
-        tzn. vypisujete pouze pole, kde obsazeno je 1. **/
 }
 
-
-void init(ThashMap *hashmap, int n)
+void init(ThashMap *hashmap)
 {
-    for(int i = 0; i < n - 1; i++) {
-        hashmap->value[i].occupied = false;
+    for(int i = 0; i < hashmap->length; i++) {
+        hashmap->array[i].occupied = false;
     }
 }
 
-
-int hash(ThashMap *hashmap, Telement person)
+int hashFunction(char name[], ThashMap *hashmap)
 {
-    /** vrati bud upraveny vek (podle delky pole) nebo totalni cif soucet, nebo jednotky, nebo udelejte vlastni hashfunkci podle delky pole*/
-    int sum;
-    int length = strlen(person.name);
-    for(int i = 0; i < length; i++) {
-        sum += person.name[i];
-
+    int result = 0;
+    /* for(int i = 0; name[i] != '\0'; i++) { */
+    for(int i = 0; name[i]; i++) {
+        result += name[i];
     }
 
-    return sum % length;
+    return result % hashmap->length;
 }
 
 
-/******** Vloz do tabulky *******/
-int insertHmap(ThashMap * hashmap, int n, Telement person)
+int insertHmap(ThashMap *hashmap, Tperson person)
 {
-   /** dopln (viz Classroom str. 35)**/
-    int index = hash(hashmap, person);
-    hashmap->value[index] = person;
-    hashmap->value[index].occupied = true;
+    int hash = hashFunction(person.name, hashmap);
+    hashmap->array[hash] = person;
+    /* hashmap->array[hash].occupied = true; */
+    return hash;
 }
 
-/******** Vymaz z tabulky *******/
-int removeHmap(/**dopln pole, delku, vek podle ktereho odebirame**/)
+int removeHmap(ThashMap *hashmap, char name[])
 {
-    /**dopln (viz Classroom str. 36)**/
+    int hash = hashFunction(name, hashmap);
+    hashmap->array[hash].occupied = false;
+    return hash;
 }
 
-/******** Najdi v tabulce *******/
-int findHmap(/**dopln pole, delku, co vkladme: datovy typ osoba**/)
+int findHmap(ThashMap *hashmap, char name[], Tperson *person)
 {
-    /**dopln (viz Classroom str. 37)**/
-    /** Pohlidejte si, ze obsazeno je 1, 0 totiz znamena, ze polozka neexistuje, podle toho vypisujte **/
+    int hash = hashFunction(name, hashmap);
+    *person = hashmap->array[hash];
+    return hashmap->array[hash].occupied;
 }
 
+void insert(ThashMap *hashmap)
+{
+    printf("Enter a name and a age: ");
+    Tperson person;
+    scanf("%20s %i", person.name, &person.age);
+    person.occupied = true;
+    insertHmap(hashmap, person);
+}
+
+void getPerson(ThashMap * hashmap)
+{
+    printf("Enter a name: ");
+    char name[21];
+    scanf("%20s", name);
+    Tperson person;
+    if (!findHmap(hashmap, name, &person)) {
+        printf("Not Found\n");
+        return;
+    }
+
+    writeOutPerson(&person);
+}
+
+void end(ThashMap * hashmap)
+{
+    exit(0);
+}
+
+const int sizeOfAction = 3;
+const Action action[] = {
+    { "end", end },
+    { "insert", insert },
+    { "get", getPerson },
+    { "write out everything", writeOutMap },
+};
 
 
-/******** MAIN ******************************************************/
 int main(void)
 {
-    /** 1. Vytvor osoba pole[10] + dalsi pomocne promenne, popr. pole jine delky pokud chcete**/ 
-    int array[MAXN];
+    int max = 10;
+    Tperson *array = (Tperson *) malloc(sizeof(Tperson) * max);
 
+    ThashMap hashmap;
+    hashmap.array = array;
+    hashmap.length = max;
 
-    /** 3. Zavolej inicializaci pole: funkci init (chceme vsechny pole nastavit na obsazeno = 0) **/
+    init(&hashmap);
 
-       // dopln
-
-    /** 4. Do pole bude uzivatel zadavat osoby: jmeno a vek, a to tak dlouho, dokud uzivatel nezada nesmyslny vek, tj.
-           napriklad zaporny. **/
-    int age;
-    printf("Enter a name: ");
-   // dopln
-    printf("Enter a age: ");
-  //  dopln
-    while(0 < age)
-    {
-      /**  zavolejte funkci vlozHtab a pridejte novou osobu**/
-        printf("Zadej jmeno: ");
-      //  dopln
-        printf("Zadej vek: ");
-      //  dopln
+    while (1) {
+        int actionOfIndex;
+        printf("Enter a number: ");
+        scanf("%i", &actionOfIndex);
+        action[actionOfIndex].function(&hashmap);
     }
 
-
-/** 3. Zavolejte funkci vypis **/
-
-    //dopln
-
-
-/** 4. Zavolejte funkci pro vyhledani osoby ... vyhledavame podle veku **/
-
-    printf("Enter a age of person, who we search: ");
-   // dopln
-  /**  zavolej funkci najdiHtab
-    vypis jmeno osoby, pokud existuje (obsazeno == 1), jinak vypis, ze takova osoba neni**/
-
-/** 5. Zavolejte funkci pro odebrani nejake osoby ... odebirame osobu podle jejiho veku **/
-
-    printf("Enter a age of person, who we remove: ");
-    //dopln
-    //zavolej funkci vymazHtab
-
-/** 6. Zavolejte funkci vypis **/
-
-    //dopln
-
-  return 0;
+    return 0;
 }
 
+
+// How does pointer works? - Explanation
 /* fce(typ * p ) { */
 /*     p->slozka = ... */
 /* } */
