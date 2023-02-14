@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 
 
 typedef struct person
@@ -24,18 +23,6 @@ typedef struct
     char *text;
     void (*function)(ThashMap *hashmap);
 } Action;
-
-// dynamic array 
-/* ThashMap loadElements(int length) { */
-/*     /1* map = malloc(sizeof(ThashMap)); *1/ */
-/*     ThashMap map; */
-
-/*     map.value = malloc(length*sizeof(Telement)); */
-
-/*     map.n = length; */
-
-/*     return map; */
-/* } */
 
 void writeOutPerson(Tperson *person)
 {
@@ -64,8 +51,7 @@ void init(ThashMap *hashmap)
 int hashFunction(char name[], ThashMap *hashmap)
 {
     int result = 0;
-    /* for(int i = 0; name[i] != '\0'; i++) { */
-    for(int i = 0; name[i]; i++) {
+    for(int i = 0; name[i] != '\0'; i++) {
         result += name[i];
     }
 
@@ -77,7 +63,6 @@ int insertHmap(ThashMap *hashmap, Tperson person)
 {
     int hash = hashFunction(person.name, hashmap);
     hashmap->array[hash] = person;
-    /* hashmap->array[hash].occupied = true; */
     return hash;
 }
 
@@ -134,7 +119,7 @@ const Action action[] = {
 
 int main(void)
 {
-    int max = 10;
+    int max = 100;
     Tperson *array = (Tperson *) malloc(sizeof(Tperson) * max);
 
     ThashMap hashmap;
@@ -149,6 +134,8 @@ int main(void)
         scanf("%i", &actionOfIndex);
         action[actionOfIndex].function(&hashmap);
     }
+
+    free(array);
 
     return 0;
 }
