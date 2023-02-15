@@ -8,7 +8,6 @@ typedef struct person
     char name[21];
     int age;
     bool occupied;
-    struct person *next;
 } Tperson;
 
 typedef struct
@@ -27,9 +26,6 @@ typedef struct
 void writeOutPerson(Tperson *person)
 {
     printf("%s %i\n", person->name, person->age);
-    if (person->next) {
-        writeOutPerson(person->next);
-    }
 }
 
 void writeOutMap(ThashMap *hashmap)
@@ -80,13 +76,28 @@ int findHmap(ThashMap *hashmap, char name[], Tperson *person)
     return hashmap->array[hash].occupied;
 }
 
-void insert(ThashMap *hashmap)
+void insertPerson(ThashMap *hashmap)
 {
     printf("Enter a name and a age: ");
     Tperson person;
     scanf("%20s %i", person.name, &person.age);
     person.occupied = true;
     insertHmap(hashmap, person);
+}
+
+void removePerson(ThashMap * hashmap)
+{
+    printf("Enter a name: ");
+    char name[21];
+    scanf("%20s", name);
+    Tperson person;
+    if (!findHmap(hashmap, name, &person)) {
+        printf("Not Found\n");
+        return;
+    }
+
+    removeHmap(hashmap, person.name);
+    printf("%s removed\n", person.name);
 }
 
 void getPerson(ThashMap * hashmap)
@@ -103,6 +114,40 @@ void getPerson(ThashMap * hashmap)
     writeOutPerson(&person);
 }
 
+void pause(void)
+{
+    #if defined __WIN32 || defined __WIN64
+        system("pause"); 
+	#else 
+		system("read a");
+	#endif
+}
+
+void clear(void)
+{
+	#ifdef _WIN32 
+		system("cls");
+	#elif defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
+	    system("clear");
+	//add some other OSes here if needed
+	#else
+		#error "OS not supported."
+	#endif
+}
+
+void menu(void)
+{
+    clear();
+    printf("HASHMAP\n"
+           "0..............................exit\n"
+           "1...............Insert a new person\n"
+           "2.....Remove a person by their name\n"
+           "3.......Find a person by their name\n"
+           "4...............Write out everybody\n"
+            );
+
+}
+
 void end(ThashMap * hashmap)
 {
     exit(0);
@@ -111,7 +156,8 @@ void end(ThashMap * hashmap)
 const int sizeOfAction = 3;
 const Action action[] = {
     { "end", end },
-    { "insert", insert },
+    { "insert", insertPerson },
+    { "remove", removePerson },
     { "get", getPerson },
     { "write out everything", writeOutMap },
 };
@@ -129,10 +175,15 @@ int main(void)
     init(&hashmap);
 
     while (1) {
+        menu();
         int actionOfIndex;
-        printf("Enter a number: ");
+        printf("Choose a number: ");
         scanf("%i", &actionOfIndex);
         action[actionOfIndex].function(&hashmap);
+
+        if (actionOfIndex != 0 && actionOfIndex != 1) {
+            pause();
+        }
     }
 
     free(array);
