@@ -1,3 +1,20 @@
+/* Vytvořte program, který přepíše kmenový soubor (kmenovy.txt) na základě souboru změn (zmeny.txt). */
+
+/* Soubor změn: */
+/* ------------------------------------------------------------------------ */
+/* 10 Kacer Donald 73 trumpetista USA 666666 0 */
+/* ------------------------------------------------------------------------ */
+/* znamená, že měníme/mažeme osobu s ID 10, poslední číslo 0 znamená, že údaj upravujeme, */ 
+/*     takže v kmenovém souboru již existuje. Úprava se týká všech položek, osoba č. 10 */ 
+/*     se přejmenuje na Kacer Donald, věk se změní na 73, povolání se změní na trumpetista, stát bude USA, plat 666666. */
+/* Pokud je poslední číslice -1, znamená to, že danou osobu mažeme, */ 
+/*       tj. ve výsledném kmenovém souboru již nebude. */
+/* Pokud je ID osoby 0 (a poslední číslo je 1), znamená to, že osobu do nového kmenového souboru přidáváme. */ 
+/* Tato osoba má ID 0, protože obdrží takové nové ID, kterou osobu zařadí na konec aktualizovaného kmenového souboru. */
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -36,39 +53,6 @@ int load(FILE *input, Tperson a[], int max_length)
 
     return i;
 }
-
-/* int searchID(Tperson array[], int length, int searchedID) */
-/* { */
-/*     int left = 0; */
-/*     int right = length - 1; */
-
-/*     while (left <= right) { */
-/*         int middle = (left + right) / 2; */
-
-/*         if (array[middle].id == searchedID) { */
-/*             return middle; */
-/*         } */
-/*         if (array[middle].id < searchedID) { */
-/*             left = middle + 1; */
-/*         } else { */
-/*             right = middle - 1; */
-/*         } */
-/*     } */
-
-/*     return -1; */
-/* } */
-
-/* int seqSortSearch(Tperson array[], int n, int key) */
-/* { */
-/*     int i = 0; */
-    
-/*     while (i < n && array[i].id < key) { */
-/*         i++; */
-/*     } */
-
-/*     if (i < n && array[i].id == key) return i; */
-/*     else return -1; */
-/* } */
 
 int _find(Tperson array[], int left, int right, int searchedID)
 {
