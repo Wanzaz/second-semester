@@ -1,0 +1,8 @@
+Terka holka 1 2 3
+Tonda kluk 1 1 2
+Honza kluk 1 4 4
+Jakub kluk 1 5 4
+Karel kluk 1 3 5
+Eva holka 1 1 5
+Jana holka 1 2 4
+Olga holka 1 3 1
