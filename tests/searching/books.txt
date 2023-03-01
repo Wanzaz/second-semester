@@ -1,0 +1,7 @@
+Pan_prstenu Tolkien 350 400 10
+Zidle_a_stul Petr 250 100 0
+Mapa_sveta Pavel 100 300 20
+Topic Tomas 298 150 30
+Petr_a_Pavel Ondrej 67 200 10
+Uvidime Roman 350 130 10
+Yahulime Standa 322 400 25
