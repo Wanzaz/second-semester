@@ -1,3 +1,7 @@
+# Python - Docs
+py-docs/
+py-docs-text/
+
 # Debugger
 *.vimspector.json
 
