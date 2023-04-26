@@ -1,3 +1,5 @@
+/*N is always on the side of FOREIGN KEY*/
+
 CREATE TABLE students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
