@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="pomocny-modul.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="54" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="137" />
+			<Collapse line="231" />
+			<Collapse line="241" />
+			<Collapse line="251" />
+			<Collapse line="372" />
+			<Collapse line="382" />
+			<Collapse line="506" />
+			<Collapse line="511" />
+			<Collapse line="603" />
+			<Collapse line="678" />
+			<Collapse line="685" />
+			<Collapse line="763" />
+			<Collapse line="770" />
+			<Collapse line="886" />
+			<Collapse line="896" />
+			<Collapse line="990" />
+			<Collapse line="1015" />
+			<Collapse line="1026" />
+		</Folding>
+	</File>
+</CodeBlocks_layout_file>
