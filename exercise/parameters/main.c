@@ -1,9 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _result 
+{
+    float circuit;
+    float content;
+} Tresults;
 
 void rectangle(float a, float b, float *circuit, float *content)
 {
     *circuit = 2 * (a + b);
     *content = a * b;
+}
+
+void returnResultsWithStructs(float a, float b, Tresults *results)
+{
+    rectangle(a, b, &results->circuit, &results->content);
 }
 
 void returnResults(float *r1, float *r2)
@@ -31,5 +43,10 @@ int main(int argc, char *argv[])
     printf("Circuit: %.2f\n", circuit);
     printf("Content: %.2f\n", content);
 
+    Tresults results;
+    returnResultsWithStructs(10.4, 9.7, &results); // (Tresults *)&circuit - cast to Tresults pointer
+
+    printf("Circuit: %.2f\n", circuit);
+    printf("Content: %.2f\n", content);
     return 0;
 }
